@@ -42,6 +42,9 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.black
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
             #selector(refreshWebView(_:)), for: UIControl.Event.valueChanged)

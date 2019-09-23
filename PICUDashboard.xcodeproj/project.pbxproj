@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7F8206F9232A9A7A00720513 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F8206F8232A9A7A00720513 /* Images.xcassets */; };
+		7FA4842923393195008C0BE5 /* picu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4842823393195008C0BE5 /* picu2.png */; };
+		7FA4842B233932B7008C0BE5 /* picu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4842A233932B7008C0BE5 /* picu.png */; };
 		7FB292DF22E75704000BA553 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB292DE22E75704000BA553 /* AppDelegate.swift */; };
 		7FB292E122E75704000BA553 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB292E022E75704000BA553 /* ViewController.swift */; };
 		7FB292E422E75704000BA553 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB292E222E75704000BA553 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		7F8206F8232A9A7A00720513 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7FA4842823393195008C0BE5 /* picu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picu2.png; path = ../../../../Downloads/picu2.png; sourceTree = "<group>"; };
+		7FA4842A233932B7008C0BE5 /* picu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picu.png; path = ../../../../Downloads/picu.png; sourceTree = "<group>"; };
 		7FB292DB22E75704000BA553 /* PICUDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PICUDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB292DE22E75704000BA553 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FB292E022E75704000BA553 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,11 +103,13 @@
 		7FB292DD22E75704000BA553 /* PICUDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				7FA4842823393195008C0BE5 /* picu2.png */,
 				7FB292DE22E75704000BA553 /* AppDelegate.swift */,
 				7FB292E022E75704000BA553 /* ViewController.swift */,
 				7FB292E222E75704000BA553 /* Main.storyboard */,
 				7FB292E522E75705000BA553 /* Assets.xcassets */,
 				7FB292E722E75705000BA553 /* LaunchScreen.storyboard */,
+				7FA4842A233932B7008C0BE5 /* picu.png */,
 				7FB292EA22E75705000BA553 /* Info.plist */,
 				7F8206F8232A9A7A00720513 /* Images.xcassets */,
 			);
@@ -234,8 +240,10 @@
 			files = (
 				7FB292E922E75705000BA553 /* LaunchScreen.storyboard in Resources */,
 				7F8206F9232A9A7A00720513 /* Images.xcassets in Resources */,
+				7FA4842B233932B7008C0BE5 /* picu.png in Resources */,
 				7FB292E622E75705000BA553 /* Assets.xcassets in Resources */,
 				7FB292E422E75704000BA553 /* Main.storyboard in Resources */,
+				7FA4842923393195008C0BE5 /* picu2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +443,7 @@
 		7FB2930422E75705000BA553 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
@@ -443,7 +452,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org4.luriechildrens.PICUDashboard;
+				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -453,6 +462,7 @@
 		7FB2930522E75705000BA553 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
@@ -461,7 +471,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org4.luriechildrens.PICUDashboard;
+				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
