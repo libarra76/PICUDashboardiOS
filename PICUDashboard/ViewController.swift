@@ -35,10 +35,12 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIScreen.main.brightness = CGFloat(1.0)
+        
         setupWebView()
         
         // Do any additional setup after loading the view.
-        let url = URL(string: "http://lc-ofcwebapp01/Home/Index")!
+        let url = URL(string: "https://picudashtest.luriechildrens.org/POC/")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         
