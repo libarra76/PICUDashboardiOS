@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F19845423748D2500242010 /* picu_red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F19845323748D2500242010 /* picu_red.jpg */; };
 		7F19845623748D3200242010 /* picu_green.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F19845523748D3200242010 /* picu_green.jpg */; };
+		7F782A822386F78600887338 /* ConnMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782A812386F78600887338 /* ConnMonitor.swift */; };
 		7F8206F9232A9A7A00720513 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F8206F8232A9A7A00720513 /* Images.xcassets */; };
 		7FA4842923393195008C0BE5 /* picu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4842823393195008C0BE5 /* picu2.png */; };
 		7FA4842B233932B7008C0BE5 /* picu.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4842A233932B7008C0BE5 /* picu.png */; };
@@ -41,10 +42,11 @@
 /* Begin PBXFileReference section */
 		7F19845323748D2500242010 /* picu_red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = picu_red.jpg; path = ../../../../Downloads/picu_red.jpg; sourceTree = "<group>"; };
 		7F19845523748D3200242010 /* picu_green.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = picu_green.jpg; path = ../../../../Downloads/picu_green.jpg; sourceTree = "<group>"; };
+		7F782A812386F78600887338 /* ConnMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnMonitor.swift; sourceTree = "<group>"; };
 		7F8206F8232A9A7A00720513 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7FA4842823393195008C0BE5 /* picu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picu2.png; path = ../../../../Downloads/picu2.png; sourceTree = "<group>"; };
 		7FA4842A233932B7008C0BE5 /* picu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = picu.png; path = ../../../../Downloads/picu.png; sourceTree = "<group>"; };
-		7FB292DB22E75704000BA553 /* PICU POC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PICU POC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FB292DB22E75704000BA553 /* PICU PRD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PICU PRD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB292DE22E75704000BA553 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FB292E022E75704000BA553 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7FB292E322E75704000BA553 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		7FB292DC22E75704000BA553 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7FB292DB22E75704000BA553 /* PICU POC.app */,
+				7FB292DB22E75704000BA553 /* PICU PRD.app */,
 				7FB292EF22E75705000BA553 /* PICUDashboardTests.xctest */,
 				7FB292FA22E75705000BA553 /* PICUDashboardUITests.xctest */,
 			);
@@ -118,6 +120,7 @@
 				7FB292EA22E75705000BA553 /* Info.plist */,
 				7F8206F8232A9A7A00720513 /* Images.xcassets */,
 				7F19845523748D3200242010 /* picu_green.jpg */,
+				7F782A812386F78600887338 /* ConnMonitor.swift */,
 			);
 			path = PICUDashboard;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildPhases = (
 				7FB292D722E75703000BA553 /* Sources */,
 				7FB292D822E75703000BA553 /* Frameworks */,
+				7F782A802386E4D100887338 /* Show Version on LaunchScreen */,
 				7FB292D922E75703000BA553 /* Resources */,
 			);
 			buildRules = (
@@ -157,7 +161,7 @@
 			);
 			name = PICUDashboard;
 			productName = PICUDashboard;
-			productReference = 7FB292DB22E75704000BA553 /* PICU POC.app */;
+			productReference = 7FB292DB22E75704000BA553 /* PICU PRD.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7FB292EE22E75705000BA553 /* PICUDashboardTests */ = {
@@ -271,12 +275,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7F782A802386E4D100887338 /* Show Version on LaunchScreen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Show Version on LaunchScreen";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Output version & build number to the APP_VERSION label on LaunchScreen.storyboard\nversionNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\n\n#sed -i \"\" -e \"/userLabel=\\\"APP_VERSION\\\"/s/text=\\\"[^\\\"]*\\\"/text=\\\"Version: $versionNumber ($buildNumber)\\\"/\" \"$PROJECT_DIR/$PROJECT_NAME/Storyboards/Base.lproj/LaunchScreen.storyboard\" Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7FB292D722E75703000BA553 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7FB292E122E75704000BA553 /* ViewController.swift in Sources */,
+				7F782A822386F78600887338 /* ConnMonitor.swift in Sources */,
 				7FB292DF22E75704000BA553 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,16 +481,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
 				INFOPLIST_FILE = PICUDashboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.POC;
-				PRODUCT_NAME = "PICU POC";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.PRD;
+				PRODUCT_NAME = "PICU PRD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -478,16 +504,16 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
 				INFOPLIST_FILE = PICUDashboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.POC;
-				PRODUCT_NAME = "PICU POC";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.PRD;
+				PRODUCT_NAME = "PICU PRD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
