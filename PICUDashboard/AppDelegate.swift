@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Screen Brightness from DidBecomeActive: \(UIScreen.main.brightness)")
         //Thread.sleep(forTimeInterval: 1.5)
         UIScreen.main.brightness = CGFloat(1.0)
+        //UIScreen.main.animateBrightness()
         print("Screen Brightness from DidBecomeActive: \(UIScreen.main.brightness)")
     }
 

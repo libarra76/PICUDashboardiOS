@@ -14,9 +14,10 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     var webView: WKWebView!
     var webViewLoaded: Bool=false
     
-     private var usersBrightness = UIScreen.main.brightness
-    private var viewWillDisappearWasCalled = false
+    private var usersBrightness = UIScreen.main.brightness
     private var willEnterForegroundWasCalled = false
+    private var viewWillDisappearWasCalled = false
+    
     //override func loadView() {
     //    webView = WKWebView()
     //    webView.navigationDelegate = self
@@ -50,7 +51,11 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        usersBrightness = UIScreen.main.brightness
+
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         
         
         setupWebView()
@@ -79,19 +84,35 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         //scrollView.panGestureRecognizer.isEnabled = false
     }
     
-    /*
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        usersBrightness = UIScreen.main.brightness
+        UIScreen.main.animateBrightness(to: 1, duration: 0.6)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        viewWillDisappearWasCalled = true
+        UIScreen.main.animateBrightness(to: usersBrightness, duration: 0.3)
+    }
+
+    @objc private func applicationWillResignActive() {
+        UIScreen.main.animateBrightness(to: usersBrightness, duration: 0.3)
+    }
+
     @objc private func applicationWillEnterForeground() {
         willEnterForegroundWasCalled = true
         usersBrightness = UIScreen.main.brightness
-        UIScreen.main.brightness = CGFloat(1.0)
-        //UIScreen.main.brightness  animateBrightness(to: 1, duration: 0.6)
+        UIScreen.main.animateBrightness(to: 1, duration: 0.6)
     }
-    */
-    /*
+
     @objc private func applicationDidBecomeActive() {
         // When the app enters the foreground again because the user closed notification
         // or control center then `UIApplicationWillEnterForeground` is not called, necessitating
         // also listening to `UIApplicationDidBecomeActive`.
+
         // This guard ensures the brightness is not increased when the app is opened from the home
         // screen, the multitasker, etc., and also when the view controller is dismissing, which can
         // occur if the user closes the view control quickly after closing notification or control center
@@ -101,10 +122,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         }
         
         usersBrightness = UIScreen.main.brightness
-        UIScreen.main.brightness = CGFloat(1.0)
-        //UIScreen.main.animateBrightness(to: 1, duration: 0.6)
+        UIScreen.main.animateBrightness(to: 1, duration: 0.6)
     }
-    */
     
     @objc func brightnessDidChange() {
         print("From brightnessDidChange Event \(UIScreen.main.brightness)")
