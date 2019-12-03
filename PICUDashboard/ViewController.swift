@@ -51,22 +51,33 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("viewDidLoad kicked off")
         usersBrightness = UIScreen.main.brightness
-
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         
+        DispatchQueue.main.async(execute: {
+            /* Do UI work here */
+            
+            
+ NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+ 
+            NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+            /*
+            NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+            */
+        })
+
         
         setupWebView()
         
         //UIAlertAction('Before Loading View')
         loadWebVew()
         
+        /*
         Monitor().startMonitoring { [weak self] connection, reachable in
             guard let strongSelf = self else { return }
             strongSelf.doSomething(connection, reachable: reachable)
         }
+        */
         
         /*
         //check if brightness changed
