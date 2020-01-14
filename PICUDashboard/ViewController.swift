@@ -8,6 +8,9 @@
 
 import UIKit
 import WebKit
+//import CoreLocation //for wifi SSID
+import Foundation
+//import SystemConfiguration.CaptiveNetwork
 
 class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate {
     
@@ -17,6 +20,10 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     private var usersBrightness = UIScreen.main.brightness
     private var willEnterForegroundWasCalled = false
     private var viewWillDisappearWasCalled = false
+    
+    //var locationManager = CLLocationManager() // for wifi SSID
+    
+    var timer = Timer()
     
     //override func loadView() {
     //    webView = WKWebView()
@@ -37,28 +44,110 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         webView = WKWebView(frame:.zero , configuration: webConfiguration)
         webView.uiDelegate = self
         
+        
         //view = webView
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         
+        //this will adjust the screen to fit full screen
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":webView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-24-[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":webView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(),
+            metrics: nil, views: ["v0":webView!]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-24-[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":webView!]))
+ 
+         
     }
     
+    func TouchScreen(){
+        let pointOnTheScreen = CGPoint(x: 50, y: 50)
+        view.hitTest(pointOnTheScreen, with: nil)
+        print("screen touched")
+    }
+    /*
+    func updateWiFi() {
+        let arr = currentSSIDs()
+        print(arr)
+
+    }
     
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            updateWiFi()
+        }
+    }
+    
+    func currentSSIDs() -> [String] {
+
+        guard let interfaceNames = CNCopySupportedInterfaces() as? [String] else {
+            return []
+        }
+
+        return interfaceNames.compactMap { name in
+          
+            print(name)
+
+            guard let info = CNCopyCurrentNetworkInfo(name as CFString) as? [String:AnyObject] else {
+
+                return nil
+
+            }
+
+            guard let ssid = info[kCNNetworkInfoKeySSID as String] as? String else {
+
+                return nil
+
+            }
+
+            return ssid
+        }
+    }
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //self.navigationController?.setNavigationBarHidden(true, animated: false)
+        print("isIdleTimerDisabled viewDidLoad: \(UIApplication.shared.isIdleTimerDisabled)")
         print("viewDidLoad kicked off")
+        
+        //get wifi ssid
+        /*
+        let wifissid: String?
+        wifissid = getWiFiSsid()
+        print("WIFI SSID:\(String(describing: wifissid))")
+        */
+        /*
+        if #available(iOS 13.0, *) {
+
+            let status = CLLocationManager.authorizationStatus()
+
+            if status == .authorizedWhenInUse {
+
+                updateWiFi()
+
+            } else {
+
+                locationManager.delegate = self
+
+                locationManager.requestWhenInUseAuthorization()
+
+            }
+
+        } else {
+
+            updateWiFi()
+
+        }
+        */
+        
         usersBrightness = UIScreen.main.brightness
+        
+        
         
         DispatchQueue.main.async(execute: {
             /* Do UI work here */
+            print("isIdleTimerDisabled viewDidLoad in Queue: \(UIApplication.shared.isIdleTimerDisabled)")
             
-            
- NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
  
             NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
             /*
@@ -70,14 +159,22 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         setupWebView()
         
         //UIAlertAction('Before Loading View')
-        loadWebVew()
+        loadWebVew("https://picudash.luriechildrens.org")
         
-        /*
+        //This will monitor network connectivity and then refresh view once it's back up.
         Monitor().startMonitoring { [weak self] connection, reachable in
             guard let strongSelf = self else { return }
             strongSelf.doSomething(connection, reachable: reachable)
         }
-        */
+        
+        //code that reloads website
+            
+        //testing timer logic
+        timer = Timer.scheduledTimer(timeInterval: 45, target: self, selector: #selector(ViewController.doStuff), userInfo: nil, repeats: true)
+        let resetTimer = UITapGestureRecognizer(target: self, action: #selector(ViewController.resetTimer));
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(resetTimer)
+        
         
         /*
         //check if brightness changed
@@ -87,6 +184,24 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
                                name: UIScreen.brightnessDidChangeNotification,
                                object: nil)
         */
+    }
+    
+    @objc func doStuff() {
+       // perform any action you wish to
+       //print("User inactive for more than 30 seconds .")
+        
+        //self.webView.reload()
+        TouchScreen() //for auto touch function
+        let url = webView.url?.absoluteURL //get url
+        if url?.absoluteString.range(of: "Dashboard") != nil {
+            //print("Current URL in doStuff: \(String(describing: url))")
+            webView?.reload()
+        }
+       //timer.invalidate()
+    }
+    @objc func resetTimer() {
+       timer.invalidate()
+       timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(ViewController.doStuff), userInfo: nil, repeats: true)
     }
     
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
@@ -141,7 +256,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         UIScreen.main.brightness = CGFloat(1.0)
     }
     
-    func loadWebVew() {
+    func loadWebVew(_ loadURL: String) {
         
         webViewLoaded = true
         //UIScreen.main.brightness = CGFloat(1.0)
@@ -149,9 +264,10 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         //setupWebView()
         
         // Do any additional setup after loading the view.
-        let url = URL(string: "https://picudash.luriechildrens.org/")!
+        let url = URL(string: loadURL)!
         webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = true // true if you want to allow back and forward geatures
+        
         
         webView.isOpaque = false
         webView.backgroundColor = UIColor.black
@@ -175,27 +291,31 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     
     @objc
     func refreshWebView(_ sender: UIRefreshControl) {
+        print("manual refresh called")
+        let url = webView.url?.absoluteURL
+        print("Current URL \(String(describing: url))")
         webView?.reload()
         sender.endRefreshing()
     }
     
+    //This is triggered when network monitors and checks condition
     private func doSomething(_ connection: Connection, reachable: Reachable) {
         print("Current Connection : \(connection) Is reachable: \(reachable)")
         
-        
-
         let reach = reachable == Reachable.yes ? "On" : "Off"
 
         DispatchQueue.main.async {
-            print("ViewLoaded: \(self.webViewLoaded)")
+            //print("ViewLoaded: \(self.webViewLoaded)")
 
             
             if reach == "Off" {
                 self.performSegue(withIdentifier: "NetView", sender: nil)
-                //self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false //doesn't work
+                
+                //print("isIdleTimerDisabled when wifi not reachable: \(UIApplication.shared.isIdleTimerDisabled)")
+                
             } else {
                 self.dismiss(animated: true, completion: nil)
-                
+                //print("isIdleTimerDisabled when wifi is reachable: \(UIApplication.shared.isIdleTimerDisabled)")
                 /*
                 if(self.webViewLoaded){
                     self.webView.reload()
@@ -204,7 +324,22 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
                     self.loadWebVew()
                 }
  */
-                self.webView.reload()
+                //self.webView.reload() //original working refresh view
+                //self.webView?.reload()
+                
+                let url = self.webView.url?.absoluteURL //get url
+                if url?.absoluteString.range(of: "Dashboard") != nil {
+                    print("Reconnected to wifi reloading webview: \(String(describing: url))")
+                    self.webView.reload()
+                }else{
+                    //print("Connected on: \(String(describing: connection))")
+                    //self.webView.reload()
+                    
+                    if (url == nil){
+                        self.loadWebVew("https://picudash.luriechildrens.org")
+                    }
+                    
+                }
             }
         }
     }

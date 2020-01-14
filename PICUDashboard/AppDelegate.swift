@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Thread.sleep(forTimeInterval: 4.0)
         
-        application.isIdleTimerDisabled = true
+        application.isIdleTimerDisabled = true //this will allow app to remain active with no sleep capability
         
         print("application event fired")
         
@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         print("Screen Brightness from WillEnterForeground: \(UIScreen.main.brightness)")
+        print("isIdleTimerDisabled: \(application.isIdleTimerDisabled)")
         //Thread.sleep(forTimeInterval: 1.5)
         //UIScreen.main.brightness = CGFloat(1.0)
         print("Screen Brightness from WillEnterForeground: \(UIScreen.main.brightness)")

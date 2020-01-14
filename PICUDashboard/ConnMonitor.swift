@@ -75,6 +75,7 @@ extension Monitor {
 
             } else if path.usesInterfaceType(.other) {
 
+                print("Hit Other Connection Type")
                 return callBack(.other, reachable)
 
             }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F19845423748D2500242010 /* picu_red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F19845323748D2500242010 /* picu_red.jpg */; };
 		7F19845623748D3200242010 /* picu_green.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F19845523748D3200242010 /* picu_green.jpg */; };
+		7F4A7F7323C618A100B2F89C /* WifiSSID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4A7F7223C618A100B2F89C /* WifiSSID.swift */; };
 		7F782A822386F78600887338 /* ConnMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782A812386F78600887338 /* ConnMonitor.swift */; };
 		7F782A84238883CB00887338 /* AnimateBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F782A83238883CB00887338 /* AnimateBrightness.swift */; };
 		7F8206F9232A9A7A00720513 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F8206F8232A9A7A00720513 /* Images.xcassets */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		7F19845323748D2500242010 /* picu_red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = picu_red.jpg; path = ../../../../Downloads/picu_red.jpg; sourceTree = "<group>"; };
 		7F19845523748D3200242010 /* picu_green.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = picu_green.jpg; path = ../../../../Downloads/picu_green.jpg; sourceTree = "<group>"; };
+		7F4A7F7223C618A100B2F89C /* WifiSSID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiSSID.swift; sourceTree = "<group>"; };
 		7F782A812386F78600887338 /* ConnMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnMonitor.swift; sourceTree = "<group>"; };
 		7F782A83238883CB00887338 /* AnimateBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateBrightness.swift; sourceTree = "<group>"; };
 		7F8206F8232A9A7A00720513 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				7F19845523748D3200242010 /* picu_green.jpg */,
 				7F782A812386F78600887338 /* ConnMonitor.swift */,
 				7F782A83238883CB00887338 /* AnimateBrightness.swift */,
+				7F4A7F7223C618A100B2F89C /* WifiSSID.swift */,
 			);
 			path = PICUDashboard;
 			sourceTree = "<group>";
@@ -295,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Output version & build number to the APP_VERSION label on LaunchScreen.storyboard\nversionNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\n\n#sed -i \"\" -e \"/userLabel=\\\"APP_VERSION\\\"/s/text=\\\"[^\\\"]*\\\"/text=\\\"Version: $versionNumber ($buildNumber)\\\"/\" \"$PROJECT_DIR/$PROJECT_NAME/Storyboards/Base.lproj/LaunchScreen.storyboard\" Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "# Output version & build number to the APP_VERSION label on LaunchScreen.storyboard\n#versionNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE}\")\nversionNumber=$MARKETING_VERSION\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$CURRENT_PROJECT_VERSION\n\nsed -i \"\" -e \"/userLabel=\\\"APP_VERSION\\\"/s/text=\\\"[^\\\"]*\\\"/text=\\\"Version: $versionNumber ($buildNumber)\\\"/\" \"$PROJECT_DIR/$PROJECT_NAME/Base.lproj/LaunchScreen.storyboard\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4A7F7323C618A100B2F89C /* WifiSSID.swift in Sources */,
 				7FB292E122E75704000BA553 /* ViewController.swift in Sources */,
 				7F782A822386F78600887338 /* ConnMonitor.swift in Sources */,
 				7F782A84238883CB00887338 /* AnimateBrightness.swift in Sources */,
@@ -413,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -468,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -485,7 +489,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
 				INFOPLIST_FILE = PICUDashboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -493,7 +497,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.PRD;
 				PRODUCT_NAME = "PICU PRD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -509,7 +513,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = LJSK8VJ3RJ;
 				INFOPLIST_FILE = PICUDashboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -517,7 +521,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.luriechildrens.PICUDashboard.PRD;
 				PRODUCT_NAME = "PICU PRD";
 				PROVISIONING_PROFILE_SPECIFIER = "";
